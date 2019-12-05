@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Register</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form onsubmit="register(event)">
+    <ion-list lines="full" class="ion-no-margin ion-no-padding">
+      <ion-item>
+        <ion-label position="stacked">Email <ion-text color="danger">*</ion-text>
+        </ion-label>
+        <ion-input required id="Email" type="email" name="email" [(ngModel)]="email" #ctrlEmail="ngModel"
+          pattern="[A-Za-z0-9._%+-]{1,}@[a-zA-Z]{2,}([.]{1}[a-zA-Z]{2,}|[.]{1}[a-zA-Z]{2,}[.]{1}[a-zA-Z]{2,})">
+        </ion-input>
+        <ion-text [hidden]="ctrlEmail.valid || ctrlEmail.pristine || email" color="danger">Email is required</ion-text>
+        <ion-text [hidden]="ctrlEmail.valid || !ctrlEmail.errors.pattern" color="danger">This is not a valid email
+        </ion-text>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Password <ion-text color="danger">*</ion-text>
+        </ion-label>
+        <ion-input required type="password" name="password" [(ngModel)]="password" #ctrlPassword="ngModel"></ion-input>
+        <ion-text [hidden]="ctrlPassword.valid || ctrlPassword.pristine" color="danger">Password is required</ion-text>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Password Confirmation<ion-text color="danger">*</ion-text>
+        </ion-label>
+        <ion-input required type="password" name="passwordConfirmation" [(ngModel)]="passwordConfirmation"
+          #ctrlPasswordConfirmation="ngModel"></ion-input>
+        <ion-text [hidden]="ctrlPasswordConfirmation.valid || ctrlPasswordConfirmation.pristine" color="danger">Password
+          is required</ion-text>
+        <ion-text [hidden]="!password || !passwordConfirmation || password === passwordConfirmation" color="danger">
+          Password confirmation and password aren't identical</ion-text>
+      </ion-item>
+
+      <div class="ion-padding">
+        <ion-button expand="block" type="submit" class="ion-no-margin"
+          [disabled]="!(ctrlEmail.valid && ctrlPassword.valid && ctrlPasswordConfirmation.valid && password === passwordConfirmation)">
+          Create account</ion-button>
+      </div>
+    </ion-list>
+  </form>
+</ion-content>

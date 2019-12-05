@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Login</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form onsubmit="login(event)">
+    <ion-list lines="full" class="ion-no-margin ion-no-padding">
+      <ion-item>
+        <ion-label position="stacked">Email
+        </ion-label>
+        <ion-input required type="email" name="email" [(ngModel)]="email"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Password
+        </ion-label>
+        <ion-input required type="password" name="password" [(ngModel)]="password"></ion-input>
+        </ion-input>
+      </ion-item>
+      <div class="ion-padding">
+        <ion-button expand="block" type="submit" class="ion-no-margin">Login</ion-button>
+      </div>
+    </ion-list>
+  </form>
+  <ion-list lines="full" class="ion-no-margin ion-no-padding">
+    <ion-item>
+      <ion-label class="ion-text-center">No account yet ? <a color="secondary" [routerDirection]="'root'"
+          [routerLink]="'/register'">Register</a>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>
