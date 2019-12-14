@@ -1,0 +1,8 @@
+{
+  "appId": "io.ionic.starter",
+  "appName": "m2pgi-poc-sylvain",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "www",
+  "cordova": {}
+}

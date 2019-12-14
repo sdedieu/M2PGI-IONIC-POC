@@ -5,7 +5,7 @@
 </ion-header>
 
 <ion-content>
-  <form onsubmit="register(event)">
+    <form (ngSubmit)="register()" #registerForm="ngForm">
     <ion-list lines="full" class="ion-no-margin ion-no-padding">
       <ion-item>
         <ion-label position="stacked">Email <ion-text color="danger">*</ion-text>
@@ -37,7 +37,7 @@
       </ion-item>
 
       <div class="ion-padding">
-        <ion-button expand="block" type="submit" class="ion-no-margin"
+        <ion-button expand="block" type="button" class="ion-no-margin"
           [disabled]="!(ctrlEmail.valid && ctrlPassword.valid && ctrlPasswordConfirmation.valid && password === passwordConfirmation)">
           Create account</ion-button>
       </div>

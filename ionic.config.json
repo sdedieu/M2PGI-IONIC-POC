@@ -1,5 +1,7 @@
 {
   "name": "m2pgi-poc-sylvain",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

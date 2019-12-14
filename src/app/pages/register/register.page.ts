@@ -2,6 +2,7 @@ import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import * as firebase from 'firebase/app';
 import { Router } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -16,19 +17,14 @@ export class RegisterPage {
   @Output()
   submited: EventEmitter<string> = new EventEmitter<string>();
 
-  constructor(private router: Router) { }
+  constructor(private router: Router,
+    public authService: AuthService) { }
 
-  ngOnInit() {
-  }
-  
-  register(event) {
-    event.preventDefault();
-    firebase.auth().createUserWithEmailAndPassword(this.email, this.password)
-     .then(
-       res => {
-        this.submited.emit("Registered !");        
-        this.router.navigate(['/home']);
-       },
-       err => console.log(err))
+  async register() {
+    this.authService.register({ email: this.email, password: this.password }).then(res => {
+      this.submited.emit("Registered !");
+      this.router.navigate(['/login']);
+    },
+      err => console.log(err));
   }
 }

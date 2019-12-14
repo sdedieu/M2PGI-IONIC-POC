@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Home
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card class="welcome-card">
+    <img src="/assets/shapes.svg" alt="" />
+    <ion-card-header>
+      <ion-card-subtitle>Get Started</ion-card-subtitle>
+      <ion-card-title>Welcome to my demo App</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p>Now that your are logged in, you can <a color="secondary" [routerDirection]="'root'"
+          [routerLink]="'/addList'">Add a New List</a> or manage an existing one !</p>
+    </ion-card-content>
+  </ion-card>
+  <section>
+    <ion-button expand="block" [routerDirection]="'root'"
+    [routerLink]="'/addList'">Add a New List</ion-button>
+  </section>
+</ion-content>

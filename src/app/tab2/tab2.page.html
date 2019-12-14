@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Tab Two
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content fullscreen>
+  <ion-list *ngFor="let list of lists">
+    <ion-item >
+      <ion-avatar slot="start">
+        <img src="{{list.image}}">
+      </ion-avatar>
+      <ion-label>
+        <h2>{{list.title}}</h2>
+        <h3>{{list.subtitle}}</h3>
+        <p *ngFor="let item of list.ItemsList">{{item}}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>
+

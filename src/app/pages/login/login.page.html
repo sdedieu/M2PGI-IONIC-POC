@@ -5,7 +5,7 @@
 </ion-header>
 
 <ion-content>
-  <form onsubmit="login(event)">
+    <form (ngSubmit)="loginReg()" #logginForm="ngForm">
     <ion-list lines="full" class="ion-no-margin ion-no-padding">
       <ion-item>
         <ion-label position="stacked">Email
@@ -17,7 +17,6 @@
         <ion-label position="stacked">Password
         </ion-label>
         <ion-input required type="password" name="password" [(ngModel)]="password"></ion-input>
-        </ion-input>
       </ion-item>
       <div class="ion-padding">
         <ion-button expand="block" type="submit" class="ion-no-margin">Login</ion-button>
@@ -26,8 +25,10 @@
   </form>
   <ion-list lines="full" class="ion-no-margin ion-no-padding">
     <ion-item>
-      <ion-label class="ion-text-center">No account yet ? <a color="secondary" [routerDirection]="'root'"
-          [routerLink]="'/register'">Register</a>
+      <ion-label class="ion-text-center">No account yet ? 
+        <a color="secondary" [routerDirection]="'root'" [routerLink]="'/register'">Register</a> Or login with 
+          <ion-icon ios="logo-facebook" md="logo-facebook" (click)="loginFb()"></ion-icon> 
+          <ion-icon ios="logo-google" md="logo-google"></ion-icon>
       </ion-label>
     </ion-item>
   </ion-list>
