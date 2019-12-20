@@ -1,25 +1,32 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>add-list</ion-title>
+    <ion-title>Add a new list</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-    <form (ngSubmit)="addList()" #addListForm="ngForm">
-        <ion-list lines="full" class="ion-no-margin ion-no-padding">
-          <ion-item>
-            <ion-label position="stacked">Name <ion-text color="danger">*</ion-text>
-            </ion-label>
-            <ion-input required id="name" type="text" name="name" [(ngModel)]="name" #ctrlName="ngModel">
-            </ion-input>
-            <ion-text [hidden]="ctrlName.valid || ctrlName.pristine || name" color="danger">Name is required</ion-text>
-          </ion-item>
-    
-          <div class="ion-padding">
-            <ion-button expand="block" type="button" class="ion-no-margin"
-              [disabled]="!addListForm.valid">
-              Create list</ion-button>
-          </div>
-        </ion-list>
-      </form>
+  <form (ngSubmit)="addList()" #addListForm="ngForm">
+    <ion-list lines="full" class="ion-no-margin ion-no-padding">
+      <ion-item>
+        <ion-label position="stacked">Title <ion-text color="danger">*</ion-text>
+        </ion-label>
+        <ion-input required id="title" type="text" name="title" [(ngModel)]="title" #ctrlTitle="ngModel">
+        </ion-input>
+        <ion-text [hidden]="ctrlTitle.valid || ctrlTitle.pristine || name" color="danger">Title is required</ion-text>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Subtitle</ion-label>
+        <ion-input id="subtitle" type="text" name="subtitle" [(ngModel)]="subtitle">
+        </ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Avatar</ion-label>
+        <input id="avatar" type="file" name="avatar" [(ngModel)]="avatar" accept=".png, .jpg, .jpeg">
+      </ion-item>
+      <div class="ion-padding">
+        <ion-button expand="block" type="submit" class="ion-no-margin" [disabled]="!addListForm.valid">
+          Create list</ion-button>
+      </div>
+    </ion-list>
+  </form>
 </ion-content>

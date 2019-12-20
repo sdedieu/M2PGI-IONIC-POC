@@ -6,38 +6,74 @@ import * as firebase from 'firebase/app';
 class Permissions {
   canActivate(router): boolean {
     const user = firebase.auth().currentUser;
-    if(!user) return router.navigate(['/login']);
+    if (!user) return router.navigate(['/login']);
     return true;
   }
 }
 
 @Injectable()
 class CanActivateTeam implements CanActivate {
-  constructor(private permissions: Permissions, private router: Router) {}
+  constructor(private permissions: Permissions, private router: Router) { }
 
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
-  ): Observable<boolean|UrlTree>|Promise<boolean|UrlTree>|boolean|UrlTree {
+  ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     return this.permissions.canActivate(this.router);
   }
 }
 
 const routes: Routes = [
-    {
-      path: '',
-      loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule),
-      canActivate: [CanActivateTeam]
-    },
-    {
-      path: 'login',
-      loadChildren: () => import('./pages/login/login.module').then(m => m.LoginPageModule)
-    },
-    {
-      path: 'register',
-      loadChildren: () => import('./pages/register/register.module').then(m => m.RegisterPageModule)
-    },
-  ];
+  {
+    path: '',
+    loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule),
+    //     canActivate: [CanActivateTeam]
+  },
+  {
+    path: 'addList',
+    loadChildren: () => import('./pages/list/add-list/add-list.module').then(m => m.AddListPageModule),
+    //    canActivate: [CanActivateTeam]
+  },
+  {
+    path: 'list/:id',
+    children: [
+      {
+        path: '',
+        loadChildren: () =>
+          import('./pages/list/list-details/list-details.module').then(m => m.ListDetailsPageModule),
+        //    canActivate: [CanActivateTeam]
+      }
+    ]
+  },
+  {
+    path: 'addItem/:id',
+    children: [
+      {
+        path: '',
+        loadChildren: () =>
+          import('./pages/item/add-item/add-item.module').then(m => m.AddItemPageModule),
+        //    canActivate: [CanActivateTeam]
+      }
+    ]
+  },
+  {
+    path: 'login',
+    loadChildren: () => import('./pages/login/login.module').then(m => m.LoginPageModule)
+  },
+  {
+    path: 'register',
+    loadChildren: () => import('./pages/register/register.module').then(m => m.RegisterPageModule)
+  },
+  {
+    path: 'add-item',
+    loadChildren: () => import('./pages/item/add-item/add-item.module').then( m => m.AddItemPageModule)
+  },
+  {
+    path: 'item-details',
+    loadChildren: () => import('./pages/item/item-details/item-details.module').then( m => m.ItemDetailsPageModule)
+  },
+
+];
 
 @NgModule({
   imports: [
@@ -46,4 +82,4 @@ const routes: Routes = [
   exports: [RouterModule],
   providers: [CanActivateTeam, Permissions]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

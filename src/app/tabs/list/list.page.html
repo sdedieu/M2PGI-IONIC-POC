@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Tab Two
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content fullscreen>
+  <ion-list>
+    <ion-item-sliding *ngFor="let list of lists">
+      <ion-item [routerLink]="['/list', list.id]">
+        <ion-avatar slot="start">
+          <img src="{{ list.image }}">
+        </ion-avatar>
+        <ion-label>
+          <h2>{{ list.title }}</h2>
+        </ion-label>
+      </ion-item>
+
+      <ion-item-options side="end">
+        <ion-item-option color="danger" (click)="removeOne(list)">
+          <ion-icon slot="top" name="trash"></ion-icon>
+        </ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+</ion-content>

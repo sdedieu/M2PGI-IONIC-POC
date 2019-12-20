@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>add-item</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <form (ngSubmit)="addItem()" #addItemForm="ngForm">
+    <ion-list lines="full" class="ion-no-margin ion-no-padding">
+      <ion-item>
+        <ion-label position="stacked">Title <ion-text color="danger">*</ion-text>
+        </ion-label>
+        <ion-input required id="title" type="text" name="title" [(ngModel)]="title" #ctrlTitle="ngModel">
+        </ion-input>
+        <ion-text [hidden]="ctrlTitle.valid || ctrlTitle.pristine || name" color="danger">Title is required</ion-text>
+      </ion-item>
+      <div class="ion-padding">
+        <ion-button expand="block" type="submit" class="ion-no-margin" [disabled]="!addItemForm.valid">
+          Create item</ion-button>
+      </div>
+    </ion-list>
+  </form>
+</ion-content>

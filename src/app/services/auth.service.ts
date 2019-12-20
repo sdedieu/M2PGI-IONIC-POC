@@ -11,7 +11,7 @@ export class AuthService {
   public loggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   constructor(private platform: Platform, private zone: NgZone, 
-   // private facebook: Facebook
+    private facebook: Facebook
     ) { }
 
   init(): void {
@@ -39,7 +39,7 @@ export class AuthService {
   async logout(): Promise<void> {
     if (this.platform.is("capacitor")) {
       try {
-  //      await this.facebook.logout(); // Unauth with Facebook
+        await this.facebook.logout(); // Unauth with Facebook
         await firebase.auth().signOut(); // Unauth with Firebase
       } catch (err) {
         console.log(err);
@@ -55,7 +55,7 @@ export class AuthService {
 
   async nativeFacebookAuth(): Promise<void> {
     try {
-      const response = await this.facebook.login(["public_profile", "email"]);
+      const response = await this.facebook.login(["public_settings", "email"]);
 
       console.log(response);
 
