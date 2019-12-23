@@ -32,7 +32,6 @@ export class ListDetailsPage implements OnInit {
   leaveIt() {
     this.listService.leave(this.route.snapshot.paramMap.get('id'))
       .then(res => {
-        console.log("success")
         this.router.navigate(['/tabs/list'])
       })
       .catch(err => console.log("err:" + err));
