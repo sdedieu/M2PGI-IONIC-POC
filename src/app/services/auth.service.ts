@@ -3,6 +3,7 @@ import * as firebase from 'firebase';
 import { BehaviorSubject } from 'rxjs';
 import { Platform } from '@ionic/angular';
 import { Facebook } from '@ionic-native/facebook/ngx';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,8 +11,10 @@ import { Facebook } from '@ionic-native/facebook/ngx';
 export class AuthService {
   public loggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
-  constructor(private platform: Platform, private zone: NgZone, 
-    private facebook: Facebook
+  constructor(private platform: Platform, 
+    private zone: NgZone, 
+    private facebook: Facebook,
+    private userService: UserService
     ) { }
 
   init(): void {
@@ -120,6 +123,9 @@ export class AuthService {
   }
 
   async register(data): Promise<firebase.auth.UserCredential>{
-    return firebase.auth().createUserWithEmailAndPassword(data.email, data.password);
+    const res = await firebase.auth().createUserWithEmailAndPassword(data.email, data.password);    
+    const user = firebase.auth().currentUser;
+    await this.userService.add({id: user.uid, email: user.email});
+    return res;
   }
 }

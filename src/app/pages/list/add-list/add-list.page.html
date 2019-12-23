@@ -19,10 +19,6 @@
         <ion-input id="subtitle" type="text" name="subtitle" [(ngModel)]="subtitle">
         </ion-input>
       </ion-item>
-      <ion-item>
-        <ion-label position="stacked">Avatar</ion-label>
-        <input id="avatar" type="file" name="avatar" [(ngModel)]="avatar" accept=".png, .jpg, .jpeg">
-      </ion-item>
       <div class="ion-padding">
         <ion-button expand="block" type="submit" class="ion-no-margin" [disabled]="!addListForm.valid">
           Create list</ion-button>

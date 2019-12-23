@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { ListDetailsPageRoutingModule } from './list-details-routing.module';
 
 import { ListDetailsPage } from './list-details.page';
+import { AddOwnerPage } from '../../modal/add-owner/add-owner.page';
 
 @NgModule({
   imports: [
@@ -15,6 +16,7 @@ import { ListDetailsPage } from './list-details.page';
     IonicModule,
     ListDetailsPageRoutingModule
   ],
-  declarations: [ListDetailsPage]
+  declarations: [AddOwnerPage, ListDetailsPage],
+  entryComponents: [AddOwnerPage]
 })
 export class ListDetailsPageModule {}

@@ -23,7 +23,7 @@ export class RegisterPage {
   async register() {
     this.authService.register({ email: this.email, password: this.password }).then(res => {
       this.submited.emit("Registered !");
-      this.router.navigate(['/login']);
+      this.router.navigate(['/']);
     },
       err => console.log(err));
   }

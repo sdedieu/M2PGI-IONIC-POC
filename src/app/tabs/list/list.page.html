@@ -11,9 +11,6 @@
   <ion-list>
     <ion-item-sliding *ngFor="let list of lists">
       <ion-item [routerLink]="['/list', list.id]">
-        <ion-avatar slot="start">
-          <img src="{{ list.image }}">
-        </ion-avatar>
         <ion-label>
           <h2>{{ list.title }}</h2>
         </ion-label>
@@ -26,4 +23,8 @@
       </ion-item-options>
     </ion-item-sliding>
   </ion-list>
+  <section>
+  <ion-button expand="block" [routerDirection]="'root'"
+  [routerLink]="'/addList'">Add a New List</ion-button>
+  </section>
 </ion-content>

@@ -4,6 +4,8 @@ import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AlertController } from '@ionic/angular';
+import { AngularFireModule } from 'angularfire2';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-root',

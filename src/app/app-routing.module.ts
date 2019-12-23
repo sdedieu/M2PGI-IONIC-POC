@@ -1,38 +1,18 @@
 import { NgModule, Injectable } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
-import { Observable } from 'rxjs';
-import * as firebase from 'firebase/app';
-
-class Permissions {
-  canActivate(router): boolean {
-    const user = firebase.auth().currentUser;
-    if (!user) return router.navigate(['/login']);
-    return true;
-  }
-}
-
-@Injectable()
-class CanActivateTeam implements CanActivate {
-  constructor(private permissions: Permissions, private router: Router) { }
-
-  canActivate(
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot
-  ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    return this.permissions.canActivate(this.router);
-  }
-}
+import 'firebase/auth';
+import { AuthGuard } from './services/auth.guard';
 
 const routes: Routes = [
   {
     path: '',
     loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule),
-    //     canActivate: [CanActivateTeam]
+    canActivate: [AuthGuard]
   },
   {
     path: 'addList',
     loadChildren: () => import('./pages/list/add-list/add-list.module').then(m => m.AddListPageModule),
-    //    canActivate: [CanActivateTeam]
+    canActivate: [AuthGuard]
   },
   {
     path: 'list/:id',
@@ -41,7 +21,7 @@ const routes: Routes = [
         path: '',
         loadChildren: () =>
           import('./pages/list/list-details/list-details.module').then(m => m.ListDetailsPageModule),
-        //    canActivate: [CanActivateTeam]
+        canActivate: [AuthGuard]
       }
     ]
   },
@@ -52,7 +32,7 @@ const routes: Routes = [
         path: '',
         loadChildren: () =>
           import('./pages/item/add-item/add-item.module').then(m => m.AddItemPageModule),
-        //    canActivate: [CanActivateTeam]
+        canActivate: [AuthGuard]
       }
     ]
   },
@@ -66,20 +46,18 @@ const routes: Routes = [
   },
   {
     path: 'add-item',
-    loadChildren: () => import('./pages/item/add-item/add-item.module').then( m => m.AddItemPageModule)
+    loadChildren: () => import('./pages/item/add-item/add-item.module').then(m => m.AddItemPageModule)
   },
   {
     path: 'item-details',
-    loadChildren: () => import('./pages/item/item-details/item-details.module').then( m => m.ItemDetailsPageModule)
-  },
-
+    loadChildren: () => import('./pages/item/item-details/item-details.module').then(m => m.ItemDetailsPageModule)
+  }
 ];
 
 @NgModule({
   imports: [
     RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
   ],
-  exports: [RouterModule],
-  providers: [CanActivateTeam, Permissions]
+  exports: [RouterModule]
 })
 export class AppRoutingModule { }

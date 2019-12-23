@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>add-owner</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-list>
+    <ion-item *ngFor="let user of users">
+      <ion-label>{{ user.email }}</ion-label>
+      <ion-checkbox slot="start" [(ngModel)]="user.isChecked"></ion-checkbox>
+    </ion-item>
+  </ion-list>
+  <section>
+    <ion-button color="primary" expand="block" (click)="dismiss()">Dismiss</ion-button>
+  </section>
+</ion-content>

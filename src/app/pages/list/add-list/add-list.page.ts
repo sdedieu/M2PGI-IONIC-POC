@@ -11,16 +11,14 @@ import { Router } from '@angular/router';
 export class AddListPage {
   private title: string = '';
   private subtitle: string = '';
-  private avatar: any = '';
 
   constructor(private listService: ListService, private router: Router) { }
 
   addList(){
-    const list: List = { title: this.title, subtitle: this.subtitle, avatar: this.avatar }
+    const list: List = { title: this.title, subtitle: this.subtitle, owners: [] }
     this.listService.add(list).then((res) =>
       this.router.navigate(['/'])
     ).catch(err => console.log(err));
-
   }
 
 }

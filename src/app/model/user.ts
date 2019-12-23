@@ -1,8 +1,5 @@
 export interface User {    
   id?: string;
+  isChecked?: boolean;
   email: string;
-  firstname: string;
-  lastname: string;
-  createdAt: Date;
-  image: string;
 }

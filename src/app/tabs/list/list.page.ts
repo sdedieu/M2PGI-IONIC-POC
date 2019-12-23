@@ -19,7 +19,7 @@ export class ListPage implements OnInit {
     });
   }
  
-  remove(list) {
+  removeOne(list) {
     this.listService.removeOne(list.id);
   }
 

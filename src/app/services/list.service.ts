@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Observable, combineLatest } from 'rxjs';
-import { map, flatMap } from 'rxjs/operators';
+import { map, flatMap, filter } from 'rxjs/operators';
 import { List } from '../model/list';
 import { Item } from '../model/item';
+import * as firebase from 'firebase/app';
 
 @Injectable({
   providedIn: 'root'
@@ -20,10 +21,10 @@ export class ListService {
     this.lists = this.listsCollection.snapshotChanges().pipe(
       map(actions => {
         return actions.map(a => {
-          const data = a.payload.doc.data();
-          const id = a.payload.doc.id;
+          const data = a.payload.doc.data()
+          const id = a.payload.doc.id;          
           return { id, ...data };
-        });
+        }).filter(list => list.owners.includes(firebase.auth().currentUser.uid))
       })
     );
   }
@@ -73,6 +74,8 @@ export class ListService {
   }
 
   add(list: List) {
+    const user = firebase.auth().currentUser;
+    list.owners.push(user.uid);
     return this.listsCollection.add(list);
   }
 
@@ -82,7 +85,25 @@ export class ListService {
       .add(item);
   }
 
+  addOwner(listId: string, owners: Array<string>) {
+      return this.listsCollection.doc(listId).update({ "owners": firebase.firestore.FieldValue.arrayUnion(...owners) });
+  }
+
+  leave(listId) {
+    const user = firebase.auth().currentUser;
+    return this.listsCollection.doc(listId).update({
+      "owners": firebase.firestore.FieldValue.arrayRemove(user.uid)
+    });
+  }
+
   removeOne(id) {
     return this.listsCollection.doc(id).delete();
+  }
+
+  removeItem(listId, itemId) {
+    return this.listsCollection.doc(listId)
+      .collection('items')
+      .doc(itemId)
+      .delete();
   }
 }
